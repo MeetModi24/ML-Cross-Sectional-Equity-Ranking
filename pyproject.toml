@@ -1,0 +1,35 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "ml-cross-sectional"
+version = "0.1.0"
+description = "LightGBM cross-sectional stock ranking on S&P 500 with walk-forward validation and SHAP"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "qtools @ git+https://github.com/matthiola0/qtools.git@v0.3.0",
+    "lightgbm>=4.3",
+    "xgboost>=2.0",
+    "scikit-learn>=1.4",
+    "shap>=0.45",
+    "statsmodels>=0.14",
+    "seaborn>=0.13",
+    "jupyterlab>=4.0",
+    "nbformat>=5.9",
+    "lxml>=5.0",  # qtools' get_sp500_constituents uses pd.read_html → lxml
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/mlcs"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py313"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "UP", "B"]
